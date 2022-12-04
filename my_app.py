@@ -25,8 +25,8 @@ class Main(QWidget):
         self.move(win_x, win_y)
 
     def unitUI(self):
-        self.hello = QLabel('welcome')
-        self.instruction = QLabel('instructions')
+        self.hello = QLabel('Приветствуем!')
+        self.instruction = QLabel(instruction)
         self.button_next = QPushButton(txt_next, self)
 
         self.layout_line = QVBoxLayout()
@@ -42,6 +42,7 @@ class Main(QWidget):
     def next_click(self):
         self.tw = SecondWin()
         self.hide()
+    
 
 app = QApplication([])
 win = Main()
