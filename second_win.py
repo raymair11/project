@@ -128,8 +128,10 @@ class SecondWin(QWidget):
         self.media_player.play()
         self.t.setText(time.toString('hh:mm:ss'))
         if int(time.toString('hh:mm:ss')[6:8]) >= 45:
+            self.media_player.play()
             self.t.setStyleSheet('color: rgb(0,200,0)')
         elif int(time.toString('hh:mm:ss')[6:8]) <= 15:
+            self.media_player.play()
             self.t.setStyleSheet('color: rgb(0,200,0)')
         else:
             self.t.setStyleSheet('color: rgb(0,0,0)')
