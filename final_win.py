@@ -19,10 +19,18 @@ class Finish(QWidget):
         self.move(win_x, win_y)
 
     def unit(self):
+        self.heart = self.res()
         self.index = (4*(int(self.ex.res1)+int(self.ex.res2) +
                          int(self.ex.res3))-200)/10
-        self.txt = QLabel(str(self.index))
-        self.txt2 = QLabel(self.res())
+        try:
+            self.txt2 = QLabel(
+                self.ex.name + ', ваша работоспособность сердца: ' + self.heart)
+            self.txt = QLabel('Индекс Руфье: '+str(self.index))
+        except TypeError:
+            self.txt2 = QLabel(
+                'Для получения результатов теста необходим ваш возраст. ')
+            self.txt = QLabel('')
+
         self.line = QVBoxLayout()
         self.line.addWidget(self.txt, alignment=Qt.AlignCenter)
         self.line.addWidget(self.txt2, alignment=Qt.AlignCenter)

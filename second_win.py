@@ -1,17 +1,19 @@
-from PyQt5.QtCore import Qt, QTimer, QTime
+from PyQt5.QtCore import Qt, QTimer, QTime, QUrl
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QGroupBox, QRadioButton, QPushButton, QLabel, QListWidget, QLineEdit
 from instr import *
 from final_win import *
 from PyQt5.QtGui import QFont
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 
 class Ex():
-    def __init__(self, age, res1, res2, res3):
+    def __init__(self, name, age, res1, res2, res3):
         super().__init__()
         self.age = age
         self.res1 = res1
         self.res2 = res2
         self.res3 = res3
+        self.name = name
 
 
 class SecondWin(QWidget):
@@ -28,6 +30,11 @@ class SecondWin(QWidget):
         self.move(win_x, win_y)
 
     def unit(self):
+        self.media_player = QMediaPlayer()
+        url = QUrl.fromLocalFile("tiktak.mp3")
+        content = QMediaContent(url)
+        self.media_player.setMedia(content)
+
         self.name = QLabel(name)
         self.line1 = QLineEdit('Ф.И.О')
         self.age = QLabel(age)
@@ -61,6 +68,7 @@ class SecondWin(QWidget):
         self.lay.addWidget(self.t, alignment=Qt.AlignRight)
         self.lay.addWidget(self.buttonFinish, alignment=Qt.AlignCenter)
         self.t.setFont(QFont('Times', 36, QFont.Bold))
+        self.buttonFinish.setStyleSheet('background: rgb(150,200,250)')
         self.setLayout(self.lay)
 
     def connects(self):
@@ -70,7 +78,7 @@ class SecondWin(QWidget):
         self.buttonFinish.clicked.connect(self.next_click)
 
     def next_click(self):
-        self.ex = Ex(int(self.line2.text()), int(self.line3.text()),
+        self.ex = Ex(self.line1.text(), int(self.line2.text()), int(self.line3.text()),
                      int(self.line4.text()), int(self.line5.text()))
         self.idk = Finish(self.ex)
         self.hide()
@@ -85,6 +93,7 @@ class SecondWin(QWidget):
     def timer1(self):
         global time
         time = time.addSecs(-1)
+        self.media_player.play()
         self.t.setText(time.toString('hh:mm:ss'))
         self.t.setStyleSheet('color: rgb(0,0,0)')
         if time.toString('hh:mm:ss') == '00:00:00':
@@ -100,6 +109,7 @@ class SecondWin(QWidget):
     def timer2(self):
         global time
         time = time.addSecs(-1)
+        self.media_player.play()
         self.t.setText(time.toString('hh:mm:ss')[6:8])
         self.t.setStyleSheet('color: rgb(0,0,0)')
         if time.toString('hh:mm:ss') == '00:00:00':
@@ -115,6 +125,7 @@ class SecondWin(QWidget):
     def timer3(self):
         global time
         time = time.addSecs(-1)
+        self.media_player.play()
         self.t.setText(time.toString('hh:mm:ss'))
         if int(time.toString('hh:mm:ss')[6:8]) >= 45:
             self.t.setStyleSheet('color: rgb(0,200,0)')

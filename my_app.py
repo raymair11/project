@@ -27,6 +27,7 @@ class Main(QWidget):
 
     def unitUI(self):
         self.hello = QLabel('Приветствуем!')
+        self.hello.setFont(QFont('Times', 25))
         self.instruction = QLabel(instruction)
         self.button_next = QPushButton(txt_next, self)
 
@@ -36,6 +37,7 @@ class Main(QWidget):
         self.layout_line.addWidget(self.button_next, alignment=Qt.AlignCenter)
 
         self.setLayout(self.layout_line)
+        self.button_next.setStyleSheet('background: rgb(150,200,250)')
 
     def connects(self):
         self.button_next.clicked.connect(self.next_click)
