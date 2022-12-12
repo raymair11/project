@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QGroupBox, QRadioButton, QPushButton, QLabel, QListWidget, QLineEdit
 from instr import *
+from my_app import *
 from second_win import *
 
 
@@ -19,6 +20,7 @@ class Finish(QWidget):
         self.move(win_x, win_y)
 
     def unit(self):
+        self.button_again = QPushButton('Пройти тест заново')
         self.heart = self.res()
         self.index = (4*(int(self.ex.res1)+int(self.ex.res2) +
                          int(self.ex.res3))-200)/10
@@ -34,12 +36,17 @@ class Finish(QWidget):
         self.line = QVBoxLayout()
         self.line.addWidget(self.txt, alignment=Qt.AlignCenter)
         self.line.addWidget(self.txt2, alignment=Qt.AlignCenter)
+        self.line.addWidget(self.button, alignment=Qt.AlignCenter)
         self.setLayout(self.line)
+
+    def again(self):
+        if self.button_again.clicked.connect():
+            self.tw = Main()
+            self.hide()
 
     def res(self):
         self.index = (4*(int(self.ex.res1)+int(self.ex.res2) +
                          int(self.ex.res3))-200)/10
-        print(self.index)
         if self.ex.age >= 15:
             if self.index >= 11 and self.index <= 14.9:
                 return str_res2

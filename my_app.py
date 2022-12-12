@@ -2,6 +2,11 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QGroupBox, QRadioButton, QPushButton, QLabel, QListWidget, QLineEdit
 from instr import *
 from second_win import *
+from PyQt5.QtGui import QFont
+
+QSS_LabelBold = '''QLabel { 
+    font: bold 25px;
+}'''
 
 
 class Main(QWidget):
@@ -30,7 +35,7 @@ class Main(QWidget):
         self.hello.setFont(QFont('Times', 25))
         self.instruction = QLabel(instruction)
         self.button_next = QPushButton(txt_next, self)
-
+        self.instruction.setStyleSheet(QSS_LabelBold)
         self.layout_line = QVBoxLayout()
         self.layout_line.addWidget(self.hello, alignment=Qt.AlignCenter)
         self.layout_line.addWidget(self.instruction, alignment=Qt.AlignCenter)

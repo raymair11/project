@@ -5,6 +5,10 @@ from final_win import *
 from PyQt5.QtGui import QFont
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
+QSS_LabelBold = '''QLabel { 
+    font: bold 25px;
+}'''
+
 
 class Ex():
     def __init__(self, name, age, res1, res2, res3):
@@ -30,6 +34,7 @@ class SecondWin(QWidget):
         self.move(win_x, win_y)
 
     def unit(self):
+
         self.media_player = QMediaPlayer()
         url = QUrl.fromLocalFile("tiktak.mp3")
         content = QMediaContent(url)
@@ -125,7 +130,7 @@ class SecondWin(QWidget):
     def timer3(self):
         global time
         time = time.addSecs(-1)
-        self.media_player.play()
+
         self.t.setText(time.toString('hh:mm:ss'))
         if int(time.toString('hh:mm:ss')[6:8]) >= 45:
             self.media_player.play()
@@ -138,7 +143,3 @@ class SecondWin(QWidget):
 
         if time.toString('hh:mm:ss') == '00:00:00':
             self.timer.stop()
-
-
-# app = QApplication([])
-# app.exec_()
